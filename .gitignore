@@ -43,6 +43,7 @@ vignettes/*.pdf
 *.bed
 *.bam
 *.vcf
+*.bai
 
 # Etc
 *.pdf
