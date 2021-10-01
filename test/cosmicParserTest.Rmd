@@ -1,0 +1,45 @@
+---
+title: "cosmicParser"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(magrittr)
+library(stringr)
+```
+
+rmd test that takes a COSMIC csv and outputs a df that can be converted into a BED
+
+```{r}
+# csv path/file, csv open
+csvDir <- "~/projects/RProjects/nwmh/input/cosmic/"
+csv <- "targeted37.csv"
+csvFull <- paste(csvDir, csv, sep = "")
+
+data <- read.csv(csvFull, header = TRUE)
+```
+
+```{r}
+# filter out all null entries and select only the coordinates
+data <- data %>%
+  filter(str_detect(GRCH, '37')) %>%
+  select(MUTATION_GENOME_POSITION)
+
+# split MUTATION_GENOME_POSITION into 3 columns (chr,start,end) to convert to BED
+chr <- str_split_fixed(string = data$MUTATION_GENOME_POSITION, pattern = ":", n = 2)
+chr[,1] <- sprintf("chr%s", chr[,1]) # add "chr" to first row
+bp <- str_split_fixed(string = chr[,2], pattern = "-", n = 2)
+
+final <- data.frame(chr[,1], as.numeric(bp[,1]), as.numeric(bp[,2])) # final df/output
+colnames(final) <- c("chrom", 'chromStart', 'chromEnd')
+```
+
+```{r}
+# write to BED
+bed <- final[,c("chrom", "chromStart", "chromEnd")]
+write.table(bed, "cosmic.bed", col.names = F, row.names = F, quote = F, sep = "\t")
+```
+
+

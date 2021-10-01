@@ -1,0 +1,72 @@
+---
+title: "test"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(Rsamtools)
+```
+
+```{r}
+# bam path
+inputPath <- "~/projects/RProjects/nwmh/input/"
+inputBam <- "sample.bam"
+bamFull <- paste(inputPath, inputBam, sep="")
+
+# create BamFile object
+bamFile <- BamFile(bamFull)
+```
+
+```{r}
+# check bam sequences
+seqlevels(bamFile)
+seqinfo(bamFile)
+```
+
+```{r}
+# check contents of bam
+aln <- scanBam(bamFile)
+aln <- aln[[1]]
+names(aln)
+```
+
+```{r}
+# check details of first read
+lapply(aln, function(x) x[1])
+```
+
+```{r}
+# check if there are any reads that are not aligned
+ind <- is.na(aln$pos)
+sum(ind)
+```
+
+```{r}
+# check for spliced alignments
+quickBamFlagSummary(bamFile)
+```
+
+```{r}
+# yieldsize test
+yieldSize(bamFile) <- 1
+open(bamFile)
+scanBam(bamFile)[[1]][12]
+scanBam(bamFile)[[1]][12]
+close(bamFile)
+yieldSize(bamFile) <- NA
+```
+
+```{r}
+# countBam test for one of the ranges defined by the bed file
+g <- GRanges(
+  seqnames = "chr1",
+  ranges = IRanges(start = 115256445, end = 115256564)
+)
+params <- ScanBamParam(which = g, what = scanBamWhat())
+aln2 <- countBam(bamFile, param = params)
+names(aln2)
+aln2$records # read depth in range
+```
+
+
