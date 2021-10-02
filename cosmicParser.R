@@ -1,6 +1,7 @@
 library(dplyr)
 library(magrittr)
 library(stringr)
+library(rtracklayer)
 
 ### This script takes an input directory of COSMIC targeted screen data (csv) 
 ### and an input BED file and returns an output BED file that contains the 
@@ -39,5 +40,11 @@ dataList <- lapply(files, function(x) {
 
 # combine each cosmic BED into one DF
 allF <- bind_rows(dataList)
+
+# convert allF to GRanges object
+cosmicGr <- makeGRangesFromDataFrame(allF)
+
+# import panel.bed as GRanges object
+panel <- import("input/panel.bed", format = "bed")
 
 
