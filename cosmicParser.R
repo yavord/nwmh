@@ -10,9 +10,6 @@ library(stringr)
 csvDir <- "~/projects/RProjects/nwmh/input/cosmic/"
 files <- list.files(path=csvDir, pattern="*.csv", recursive=F, full.names=T)
 
-# init DF that holds all hotspots
-allF <- data.frame()
-
 # this function takes a COSMIC csv and outputs a DF in the BED format
 cosmicToBed <- function(cosmicCsv) {
   # filter out all null entries and select only the coordinates
@@ -32,7 +29,15 @@ cosmicToBed <- function(cosmicCsv) {
   return(final)
 }
 
-lapply(files, function(x) {
-  csvFull <- read.csv(x, header = TRUE)
-  
-})
+# loop through all files in cosmic dir, convert them to a BED format DF, then
+# append to list dataList
+dataList <- lapply(files, function(x) {
+    csvFull <- read.csv(x, header = TRUE)
+    bed <- cosmicToBed(csvFull)
+    return(bed)
+  })
+
+# combine each cosmic BED into one DF
+allF <- bind_rows(dataList)
+
+
