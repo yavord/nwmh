@@ -47,4 +47,14 @@ cosmicGr <- makeGRangesFromDataFrame(allF)
 # import panel.bed as GRanges object
 panel <- import("input/panel.bed", format = "bed")
 
+# find overlaps between input bed/hotspots and sort it
+hotspotOverlap <- subsetByOverlaps(cosmicGr,panel) %>% sort()
+# filter out any sequences with a width of 0
+hotspotOverlap <- hotspotOverlap[width(hotspotOverlap) != 0]
+
+# write to BED file in the inputs
+write.table(
+  hotspotOverlap, "input/hotspot.bed", 
+  col.names = F, row.names = F, quote = F, sep = "\t"
+  )
 
