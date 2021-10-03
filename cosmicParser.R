@@ -8,7 +8,7 @@ library(rtracklayer)
 ### regions that overlap between ALL the COSMIC csv files and the input BED
 
 # find all files in dir
-csvDir <- "~/projects/RProjects/nwmh/input/cosmic/"
+csvDir <- "input/cosmic/"
 files <- list.files(path=csvDir, pattern="*.csv", recursive=F, full.names=T)
 
 # this function takes a COSMIC csv and outputs a DF in the BED format
