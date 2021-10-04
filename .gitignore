@@ -49,3 +49,4 @@ vignettes/*.pdf
 # Etc
 *.pdf
 *.txt
+output/*
