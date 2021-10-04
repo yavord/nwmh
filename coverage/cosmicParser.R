@@ -8,7 +8,7 @@ library(rtracklayer)
 ### regions that overlap between ALL the COSMIC csv files and the input BED
 
 # find all files in dir
-csvDir <- "input/cosmic/"
+csvDir <- "../input/cosmic/"
 files <- list.files(path=csvDir, pattern="*.csv", recursive=F, full.names=T)
 
 # this function takes a COSMIC csv and outputs a DF in the BED format
@@ -45,7 +45,7 @@ allF <- bind_rows(dataList)
 cosmicGr <- makeGRangesFromDataFrame(allF)
 
 # import panel.bed as GRanges object
-panel <- import("input/panel.bed", format = "bed")
+panel <- import("../input/panel.bed", format = "bed")
 
 # find overlaps between input bed/hotspots and sort it
 hotspotOverlap <- subsetByOverlaps(cosmicGr,panel) %>% sort()
@@ -54,7 +54,7 @@ hotspotOverlap <- hotspotOverlap[width(hotspotOverlap) != 0]
 
 # write to BED file in the inputs
 write.table(
-  hotspotOverlap, "input/hotspot.bed", 
+  hotspotOverlap, "../input/hotspot.bed", 
   col.names = F, row.names = F, quote = F, sep = "\t"
   )
 

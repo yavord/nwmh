@@ -3,7 +3,7 @@ library(Rsamtools)
 ### This script indexes and/or sorts an input BAM file
 
 # bam paths
-inputPath <- "input/"
+inputPath <- "../input/"
 inputBam <- "sample.bam"
 bamFull <- paste(inputPath, inputBam, sep="")
 
