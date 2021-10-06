@@ -2,6 +2,9 @@ library(vcfR)
 library(magrittr)
 source("functions.R")
 
+### this script calls all other functions (functions.R) and annotates the
+### results to the input .vcf
+
 # files
 vcfDir <- "../input/"
 vcfName <- "sample.vcf"

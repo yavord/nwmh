@@ -1,0 +1,1 @@
+### input .vcf and outputs a .txt of <variant_str> needed for ExAC API calls
