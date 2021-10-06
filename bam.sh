@@ -1,5 +1,5 @@
 #!/bin/bash
-# script for part 1 
+# script for component 1 
 
 # Conda env name
 ENV="mosdepth"
