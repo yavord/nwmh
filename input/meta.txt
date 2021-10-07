@@ -1,5 +1,6 @@
 ##INFO=<ID=VTYPE,Number=1,Type=String,Description="Type of variation">
-##ALT=<ID=INS,Description="Insertion">
-##ALT=<ID=DEL,Description="Deletion">
-##ALT=<ID=DUP,Description="Duplication">
 ##ALT=<ID=INV,Description="Inversion">
+##ALT=<ID=SUB,Description="Substitution">
+##ALT=<ID=INS,Description="Insertion">
+##ALT=<ID=DUP,Description="Duplication">
+##ALT=<ID=DEL,Description="Deletion">
