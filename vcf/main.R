@@ -17,5 +17,4 @@ vcf <- read.vcfR(vcfFull)
 
 # add meta tags of new fields to vcf
 vcf@meta <- c(vcf@meta, meta)
-vcf@meta
 
