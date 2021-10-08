@@ -7,8 +7,9 @@ library(magrittr)
 annotateVariationType <- function(ref, alt) {
   # find length difference between each alternative variant and reference
   len <- stri_length(alt) - stri_length(ref)
-  maxLen <- which.max(abs(len)) # index of most deleterious variant
-  # prioritizes lowest index in case of equal values
+  # find index of most deleterious variant 
+  # prioritizing the lowest index in case of equal values
+  maxLen <- which.max(abs(len))
   
   vType <- NA # init variation type output
   
@@ -21,25 +22,24 @@ annotateVariationType <- function(ref, alt) {
     if (len < 0) {
       vType <- "DEL"
     } else if(len > 0) {
-      ifelse(alt == paste(r,r,sep=""),vType <- "DUP",vType <- "INS")
+      ifelse(alt == paste(ref,ref,sep=""),vType <- "DUP",vType <- "INS")
     }
   }
   vType <- paste("VTYPE=",vType,sep="")
   return(vType)
 }
-x <- vcf@fix[,"INFO"]
 
 # annotateDepth <- function(x) {}
 # 
 # annotateExac <- function(x) {}
 
 annotateVcf <- function(vcf) {
-  fix <- vcf@fix
+  lenVar <- length(vcf@fix[,1]) # number of variants
   
-  # annotate variation type to vcf
-  for (i in 1:length(vcf@fix[,1])) {
-    vtype <- annotateVariationType(fix[i,"REF"],fix[i,"ALT"])
-    vcf@fix[i,"INFO"] <- paste(fix[i,"INFO"],vtype,sep=";")
+  # loop through each variant
+  for (i in 1:lenVar) {
+    vtype <- annotateVariationType(vcf@fix[i,"REF"],vcf@fix[i,"ALT"])
+    vcf@fix[i,"INFO"] <- paste(vcf@fix[i,"INFO"],vtype,sep=";")
   }
   
   return(vcf)
