@@ -4,3 +4,7 @@
 ##ALT=<ID=INS,Description="Insertion">
 ##ALT=<ID=DUP,Description="Duplication">
 ##ALT=<ID=DEL,Description="Deletion">
+"##INFO=<ID=DPR,Number=1,Type=Integer,Description=\"Read depth of reference allele\">"
+"##INFO=<ID=DPA,Number=A,Type=Integer,Description=\"Read depth of alternate allele\">"
+"##FORMAT=<ID=DPR,Number=1,Type=Integer,Description=\"Read depth of reference allele\">"
+"##FORMAT=<ID=DPA,Number=A,Type=Integer,Description=\"Read depth of alternate allele\">"

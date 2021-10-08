@@ -38,8 +38,11 @@ annotateVcf <- function(vcf) {
   
   # loop through each variant
   for (i in 1:lenVar) {
+    # annotate variation type
     vtype <- annotateVariationType(vcf@fix[i,"REF"],vcf@fix[i,"ALT"])
     vcf@fix[i,"INFO"] <- paste(vcf@fix[i,"INFO"],vtype,sep=";")
+    
+    # annotate depth of reference/alternative
   }
   
   return(vcf)
