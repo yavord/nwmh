@@ -25,11 +25,17 @@ annotateVariationType <- function(ref, alt) {
       ifelse(alt == paste(ref,ref,sep=""),vType <- "DUP",vType <- "INS")
     }
   }
-  vType <- paste("VTYPE=",vType,sep="")
+  vType <- paste("SVTYPE=",vType,sep="")
   return(vType)
 }
 
-# annotateDepth <- function(x) {}
+# input .vcf fix info and gt for single row
+# output vector (1) fix info, (2) gt row with reference/alternate allele depth
+annotateDepth <- function(fixInfo, gtRow) {
+  
+  
+  return(c(1,2))
+}
 # 
 # annotateExac <- function(x) {}
 
@@ -38,11 +44,21 @@ annotateVcf <- function(vcf) {
   
   # loop through each variant
   for (i in 1:lenVar) {
+    fixRow <- vcf@fix[i,] # current row
+    gtRow <- 
+    
     # annotate variation type
-    vtype <- annotateVariationType(vcf@fix[i,"REF"],vcf@fix[i,"ALT"])
-    vcf@fix[i,"INFO"] <- paste(vcf@fix[i,"INFO"],vtype,sep=";")
+    vtype <- annotateVariationType(fixRow["REF"],fixRow["ALT"])
+    fixRow["INFO"] <- paste(fixRow["INFO"],vtype,sep=";")
     
     # annotate depth of reference/alternative
+    depth <- annotateDepth(fixRow["INFO"], gtRow)
+    fixRow["INFO"] <- depth[1]
+    gtRow <- depth[2]
+    
+    # annotate ExAC data
+    
+    vcf@fix[i,] <- row 
   }
   
   return(vcf)

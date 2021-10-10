@@ -1,4 +1,4 @@
-##INFO=<ID=VTYPE,Number=1,Type=String,Description="Type of variation">
+##INFO=<ID=SVTYPE,Number=1,Type=String,Description="Type of variation">
 ##ALT=<ID=INV,Description="Inversion">
 ##ALT=<ID=SUB,Description="Substitution">
 ##ALT=<ID=INS,Description="Insertion">
@@ -8,3 +8,5 @@
 ##INFO=<ID=DPA,Number=A,Type=Integer,Description=\"Read depth of alternate allele\">
 ##FORMAT=<ID=DPR,Number=1,Type=Integer,Description=\"Read depth of reference allele\">
 ##FORMAT=<ID=DPA,Number=A,Type=Integer,Description=\"Read depth of alternate allele\">
+##INFO=<ID=AFE,Number=A,Type=Float,Description=\"Allele frequency based on ExAC data\">
+##FORMAT=<ID=AFE,Number=A,Type=Float,Description=\"Allele frequency based on ExAC data\">
