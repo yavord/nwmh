@@ -19,3 +19,5 @@ The following packages and software is needed before running:
 * R: `vcfR`, `stringr`, `stringi`, `magrittr`
 * Python: `requests` 
 
+Sample outputs for both parts can already be found in the output folder
+
