@@ -13,5 +13,5 @@ panel <- import(panelBedDir, format="bed") %>%
   as("data.frame")
 colnames(panel)[7] <- "coverage"
 
-write.csv(hotspot,paste(outputDir,"hotspot",sep=""),row.names=F)
-write.csv(panel,paste(outputDir,"panel",sep=""),row.names=F)
+write.csv(hotspot,paste(outputDir,"hotspot.csv",sep=""),row.names=F)
+write.csv(panel,paste(outputDir,"panel.csv",sep=""),row.names=F)
