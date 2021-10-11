@@ -33,6 +33,7 @@ def getAnnotations(fileName) :
             try:
                 annotations.append(data.json()["variant"]["allele_freq"])
                 print(data.json()["variant"]["allele_freq"])
+
             except KeyError:
                 annotations.append(".")
                 print("allele_freq for {} not found".format(var))
@@ -43,7 +44,7 @@ def getAnnotations(fileName) :
             #     print("consequence for {} not found".format(var))
         elif data.ok == False:
             print("Variant {} not found".format(var))
-        
+            
     return(annotations)
 
 file = "test.txt"
@@ -58,4 +59,5 @@ file = "test.txt"
 # print(r['variant']['allele_freq'])
 
 x = getAnnotations(file)
-prettyprint(x)
+print(x)
+# prettyprint(x)

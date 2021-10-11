@@ -6,11 +6,11 @@ source("functions.R")
 ### results to the input .vcf
 
 # files
-vcfDir <- "../input/"
+inputDir <- "../input/"
 vcfName <- "sample.vcf"
 metaName <- "meta.txt"
-vcfFull <- paste(vcfDir, vcfName, sep="")
-metaFull <-paste(vcfDir, metaName, sep="")
+vcfFull <- paste(inputDir, vcfName, sep="")
+metaFull <-paste(inputDir, metaName, sep="")
 # metadata to append to header
 meta <- read.delim(metaFull, header=F) %>% unlist(use.names=F)
 vcf <- read.vcfR(vcfFull)
@@ -18,3 +18,5 @@ vcf <- read.vcfR(vcfFull)
 # add meta tags of new fields to vcf
 vcf@meta <- c(vcf@meta, meta)
 vcfFinal <- annotateVcf(vcf)
+vcfFinal@fix[1,"INFO"]
+vcfFinal@gt[1,]
