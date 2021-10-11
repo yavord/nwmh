@@ -2,6 +2,7 @@
 # script for component 1 
 
 # Conda env name
+# Change this to the name of a conda env that has mosdepth installed
 ENV="mosdepth"
 
 mkdir -p output/hotspotBed
@@ -22,3 +23,5 @@ mosdepth --by ../../input/panel.bed panelBed ../../input/sample.bam
 cd ../hotspotBed
 conda activate $ENV
 mosdepth --by ../../input/hotspot.bed hotspotBed ../../input/sample.bam
+
+echo ".bam script is done"

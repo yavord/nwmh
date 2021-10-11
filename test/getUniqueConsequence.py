@@ -4,6 +4,8 @@ import pprint
 
 prettyprint = pprint.PrettyPrinter(indent=2).pprint
 
+### this script returns unique consequences found for all ExAC variant queries
+
 # return list of variants in exac variant ID format
 def getVariantList(fileName) :
     file = open(fileName, "r")
@@ -26,39 +28,26 @@ def getAnnotations(fileName) :
 
     for var in variantList:
         data = fetch(variantStr=var)
-        # prettyprint(data.json())
         # check if each variant exists on the ExAC database
         if data.ok == True:
-            # check if there's allele freq or consequence data available, then append it to annotations
+            # check if there's consequence data available
             try:
-                annotations.append(data.json()["variant"]["allele_freq"])
-                print("FREQ FOUND: {}".format(var))
-            except KeyError: # catch missing allele_freq
-                annotations.append(".")
-                print("allele_freq for {} not found".format(var))
-            try:
-                annotations.extend(list(data.json()["consequence"].keys()))
-                print("CSQS FOUND: {}".format(var))
-            except AttributeError: # catch missing consequence
+                annotations = annotations + list(data.json()["consequence"].keys())
+                print(list(data.json()["consequence"].keys()))
+            except (KeyError, AttributeError):
                 annotations.append(".")
                 print("consequence for {} not found".format(var))
         elif data.ok == False:
             print("Variant {} not found".format(var))
 
-    return(annotations)
+    aSet = set(annotations)
+    uniqueAnnotations = list(aSet)
 
+    return(uniqueAnnotations)
+
+
+# File input containing variant_strings
 file = "test.txt"
-# v = "14-21853913-T-C"
-# v2 = "1-115252203-G-A"
-# l = [v, v2]
-# r = fetch(variantStr=l[0]).json()
-# r2 = fetch(variantStr=l[1]).json()
-
-# prettyprint(r)
-# prettyprint(r2)
-# prettyprint(r["consequence"])
-# print(list(r2["consequence"].keys()))
-
 x = getAnnotations(file)
 print(x)
 # prettyprint(x)
