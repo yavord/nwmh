@@ -18,15 +18,19 @@ for (i in 1:length(vcf@fix[,1])) {
   chr <- str_split(row["CHROM"], "r")[[1]][2] # extract chromosome number
   alt <- str_split(row["ALT"], ",")[[1]] # extract all possible bp
   
-  variantStr <- vector() # init variant strings to be appended to final query
+  variantStr <- character(0) # init variant strings to be appended to final query
   
   # create variant string (x) for alternative bases and append to variantStr
   for (i in 1:length(alt)) {
     x <- paste(chr, row["POS"], row["REF"], alt[i], sep = "-")
-    variantStr <- c(variantStr,x)
+    if (length(variantStr > 0)) {
+      variantStr <- paste(variantStr,x,sep=",")
+    } else {
+      variantStr <- x
+    }
   }
-
+  
   exacQuery <- c(exacQuery, variantStr) # append to final output exacQuery
 }
 
-writeLines(exacQuery, "test.txt")
+writeLines(exacQuery, "../input/exacQuery.txt")

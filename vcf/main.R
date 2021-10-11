@@ -20,3 +20,5 @@ vcf@meta <- c(vcf@meta, meta)
 vcfFinal <- annotateVcf(vcf)
 vcfFinal@fix[1,"INFO"]
 vcfFinal@gt[1,]
+
+# write.vcf(vcfFinal, file = "vcfFinal")

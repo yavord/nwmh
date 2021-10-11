@@ -11,10 +11,10 @@
 ##INFO=<ID=AFE,Number=A,Type=Float,Description=\"Allele frequency based on ExAC data\">
 ##FORMAT=<ID=AFE,Number=A,Type=Float,Description=\"Allele frequency based on ExAC data\">
 ##INFO=<ID=CSQS,Number=A,Type=String,Description=\"Consequences associated with the variant\">
-##CSQ=<ID=5PUTR,Description="5 prime untranslated region">
+##CSQ=<ID=5PU,Description="5 prime untranslated region">
 ##CSQ=<ID=SPL,Description="Splice region">
-##CSQ=<ID=NCTE,Description="Non-coding transcript exon">
-##CSQ=<ID=3PUTR,Description="3 prime untranslated region">
+##CSQ=<ID=NCT,Description="Non-coding transcript exon">
+##CSQ=<ID=3PU,Description="3 prime untranslated region">
 ##CSQ=<ID=INT,Description="Intron">
-##CSQ=<ID=MISS,Description="Missense">
+##CSQ=<ID=MIS,Description="Missense">
 ##CSQ=<ID=SYN,Description="Synonymous">
