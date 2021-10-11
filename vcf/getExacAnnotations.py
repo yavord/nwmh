@@ -48,17 +48,6 @@ def getAnnotations(fileName) :
     return(annotations)
 
 file = "test.txt"
-# v = "14-21853913-T-C"
-# v2 = "1-115252203-G-A"
-# l = [v, v2]
-# r = fetch(variantStr=l[0]).json()
-# r2 = fetch(variantStr=l[1]).json()
-
-# prettyprint(r)
-# prettyprint(r2)
-# prettyprint(r["consequence"])
-# print(list(r2["consequence"].keys()))
-
 x = getAnnotations(file)
 print(x)
 # prettyprint(x)

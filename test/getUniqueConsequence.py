@@ -47,7 +47,7 @@ def getAnnotations(fileName) :
 
 
 # File input containing variant_strings
-file = "test.txt"
+file = "full.txt"
 x = getAnnotations(file)
 print(x)
 # prettyprint(x)
