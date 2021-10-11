@@ -39,7 +39,7 @@ def abbrevCSQ(csqs) :
 
 # return list of wanted annotations per variant
 def getAnnotations(fileName="../input/exacQuery.txt") :
-    print("Getting ExAC annotations")
+    print("Getting ExAC annotations (this may take a few minutes)")
     annotations = []
     variantLists = getVariantList(fileName)
 

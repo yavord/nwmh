@@ -50,16 +50,26 @@ annotateDepth <- function(fixInfo, gtRow) {
   
   return(c(fixInfo,gtRow))
 }
-# 
-# annotateExac <- function(x) {}
 
-annotateVcf <- function(vcf) {
+annotateExac <- function(exacAnotationRow) {
+  # format exac annotations for fix info row
+  fixInfo <- paste("AFE=",exacAnotationRow[1],sep="") %>%
+    paste(paste("CSQS=",exacAnotationRow[2],sep=""),sep=";")
+  
+  # format exac annotations for gt row
+  gtRow <- c("AFE",exacAnotationRow[1])
+  
+  return(c(fixInfo,gtRow))
+}
+
+annotateVcf <- function(vcf, exacAnnotations) {
   lenVar <- length(vcf@fix[,1]) # number of variants
   
   # loop through each variant
   for (i in 1:lenVar) {
     fixRow <- vcf@fix[i,] # current row
     gtRow <- vcf@gt[i,]
+    exacRow <- exacAnnotations[i,]
     
     # annotate variation type
     vtype <- annotateVariationType(fixRow["REF"],fixRow["ALT"])
@@ -71,7 +81,10 @@ annotateVcf <- function(vcf) {
     gtRow <- depth[2:3]
     
     # annotate ExAC data
-    
+    exac <- annotateExac(exacRow)
+    fixRow["INFO"] <- paste(fixRow["INFO"],exac[1],sep=";")
+    gtRow[1] <- paste(gtRow[1],exac[2],sep=":")
+    gtRow[2] <- paste(gtRow[2],exac[3],sep=":")
     
     # add annotations to output
     vcf@fix[i,"INFO"] <- fixRow["INFO"]

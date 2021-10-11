@@ -9,16 +9,17 @@ source("functions.R")
 inputDir <- "../input/"
 vcfName <- "sample.vcf"
 metaName <- "meta.txt"
+exacName <- "exacAnnotations.txt"
 vcfFull <- paste(inputDir, vcfName, sep="")
 metaFull <-paste(inputDir, metaName, sep="")
+exacFull <- paste(inputDir, exacName, sep="")
 # metadata to append to header
 meta <- read.delim(metaFull, header=F) %>% unlist(use.names=F)
+exac <- read.delim(exacFull, header=F, sep=";")
 vcf <- read.vcfR(vcfFull)
 
 # add meta tags of new fields to vcf
 vcf@meta <- c(vcf@meta, meta)
-vcfFinal <- annotateVcf(vcf)
-vcfFinal@fix[1,"INFO"]
-vcfFinal@gt[1,]
+vcfFinal <- annotateVcf(vcf, exac)
 
-# write.vcf(vcfFinal, file = "vcfFinal")
+write.vcf(vcfFinal, file = "../output/vcfFinal")
